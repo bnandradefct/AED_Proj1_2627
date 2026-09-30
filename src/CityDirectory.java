@@ -43,8 +43,9 @@ public class CityDirectory {
 
   
   public boolean isEmpty() {
-        return cities.isEmpty();
-    }
+    return !cities.iterator().hasNext();
+}
+
 
     
     public Iterator<City> iterator() {

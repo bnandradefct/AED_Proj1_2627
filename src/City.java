@@ -25,8 +25,9 @@ public class City {
   }
 
   public boolean matches(String cityName, String countryName) {
-        return this.country.equalsIgnoreCase(countryName) && 
-               this.name.equalsIgnoreCase(cityName);
-    }
+    return this.name.equalsIgnoreCase(cityName) && 
+           this.country.equalsIgnoreCase(countryName);
+}
+
 
 }

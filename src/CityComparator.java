@@ -15,7 +15,7 @@ public class CityComparator implements Comparator<City> {
             return Integer.compare(c2.getPopulation(), c1.getPopulation());
         }
 
-        
+       
         return c1.getName().compareToIgnoreCase(c2.getName());
     }
 }

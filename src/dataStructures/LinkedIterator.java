@@ -35,10 +35,14 @@ class LinkedIterator<E>  implements Iterator<E> {
     }
 
     @Override
+        
     public E next() throws NoSuchElementException {
         if(!hasNext()) throw new NoSuchElementException();
-        return nextToReturn.getNext().getElement();
+        E element = nextToReturn.getElement();
+        nextToReturn = nextToReturn.getNext();
+        return element;
     }
+
 
     @Override
     public void rewind() {
