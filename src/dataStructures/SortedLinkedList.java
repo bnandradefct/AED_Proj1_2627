@@ -8,17 +8,16 @@ import java.io.ObjectOutputStream;
 
 /**
  * Sorted linked list Implementation
- * @author AED Team
+ * @author AED  Team
  * @version 1.0
  * @param <E> Generic Element
+ * 
  */
 public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> {
-
     /**
      * Comparator of elements.
      */
     private final Comparator<E> comparator;
-
     /**
      * Constructor of an empty sorted singly linked list.
      * head and tail are initialized as null.
@@ -34,8 +33,9 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return first element in the list
      * @throws NoSuchElementException - if size() == 0
      */
-    public E getMin() throws NoSuchElementException {
-        if (head == null) {
+    public E getMin( ) throws NoSuchElementException{
+        //TODO: Left as an exercise.
+        if(currentSize == 0){
             throw new NoSuchElementException();
         }
         return head.getElement();
@@ -46,32 +46,32 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return last element in the list
      * @throws NoSuchElementException - if size() == 0
      */
-    public E getMax() throws NoSuchElementException {
-        if (tail == null) {
+    public E getMax( ) throws NoSuchElementException{
+        //TODO: Left as an exercise.
+        if(currentSize == 0){
             throw new NoSuchElementException();
         }
         return tail.getElement();
     }
-
     /**
      * Returns the first occurrence of the element equals to the given element in the list.
      * @return element in the list or null
      */
     @Override
     public E get(E element) {
+        //TODO: Left as an exercise.
         Iterator<E> iterator = iterator();
-        while (iterator.hasNext()) {
+        while(iterator.hasNext()){
             E elem = iterator.next();
             int comp = comparator.compare(elem, element);
-            if (comp == 0) {
+            if(comp == 0){
                 return elem;
-            } else if (comp > 0) {
+            } else if(comp > 0){
                 return null;
             }
         }
         return null;
     }
-
     /**
      * Returns true iff the element exists in the list.
      *
@@ -79,13 +79,14 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return true iff the element exists in the list.
      */
     public boolean contains(E element) {
+        //TODO: Left as an exercise.
         Iterator<E> iterator = iterator();
-        while (iterator.hasNext()) {
+        while(iterator.hasNext()){
             E elem = iterator.next();
             int comp = comparator.compare(elem, element);
-            if (comp == 0) {
+            if(comp == 0){
                 return true;
-            } else if (comp > 0) {
+            } else if(comp > 0){
                 return false;
             }
         }
@@ -98,72 +99,52 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @param element to be inserted
      */
     public void add(E element) {
-        LinkedNode<E> newNode = new SinglyListNode<>(element);
-
-        // 1. Caso lista vazia
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
-            currentSize++;
+        //TODO: Left as an exercise.
+        if(isEmpty() || comparator.compare(element, head.getElement()) < 0){
+            addFirst(element);
             return;
         }
 
-        // 2. Inserir antes da cabeca
-        if (comparator.compare(element, head.getElement()) < 0) {
-            newNode.setNext(head);
-            head = newNode;
-            currentSize++;
+        if(comparator.compare(element, tail.getElement()) >= 0){
+            addLast(element);
             return;
         }
 
-        // 3. Inserir depois da cauda (ou igual a cauda)
-        if (comparator.compare(element, tail.getElement()) >= 0) {
-            tail.setNext(newNode);
-            tail = newNode;
-            currentSize++;
-            return;
-        }
-
-        // 4. Inserir no meio da lista
         LinkedNode<E> current = head;
-        while (current.getNext() != null && comparator.compare(element, current.getNext().getElement()) >= 0) {
+        while(current.getNext() != null && comparator.compare(element, current.getNext().getElement()) >= 0){
             current = current.getNext();
         }
 
-        newNode.setNext(current.getNext());
-        current.setNext(newNode);
-        currentSize++;
-    }
+        addBeforeNode(element, current);
 
+    }
     /**
      * Inserts the element before node after.
      * Precondition: after is not the head of the list.
      * @param element - Element to be inserted
      * @param before - Node to be previous to the new node
      */
-    void addBeforeNode(E element, LinkedNode<E> before) {
+    void addBeforeNode(E element, LinkedNode<E> before){
+        //TODO: Left as an exercise.
         LinkedNode<E> newNode = new SinglyListNode<>(element);
         newNode.setNext(before.getNext());
         before.setNext(newNode);
-        if (before == tail) {
-            tail = newNode;
-        }
         currentSize++;
     }
-
     /**
      * Inserts the element at the first position in the list.
      * @param element - Element to be inserted
      */
-    void addFirst(E element) {
+    void addFirst( E element ) {
+        //TODO: Left as an exercise.
         LinkedNode<E> newNode = new SinglyListNode<>(element);
-        if (head == null) {
-            head = newNode;
+        if(isEmpty()){
             tail = newNode;
-        } else {
+        } else{
             newNode.setNext(head);
-            head = newNode;
         }
+        head = newNode;
+
         currentSize++;
     }
 
@@ -171,15 +152,15 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * Inserts the element at the last position in the list.
      * @param element - Element to be inserted
      */
-    void addLast(E element) {
+    void addLast( E element ) {
+        //TODO: Left as an exercise.
         LinkedNode<E> newNode = new SinglyListNode<>(element);
-        if (tail == null) {
+        if(isEmpty()){
             head = newNode;
-            tail = newNode;
-        } else {
+        } else{
             tail.setNext(newNode);
-            tail = newNode;
         }
+        tail = newNode;
         currentSize++;
     }
 
@@ -188,11 +169,11 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return element removed from the list or null if !belongs
      */
     public E remove(E element) {
-        if (head == null) {
+        //TODO: Left as an exercise.
+        if(isEmpty()){
             return null;
         }
 
-        // Remover da cabeca
         if (comparator.compare(element, head.getElement()) == 0) {
             E removed = head.getElement();
             head = head.getNext();
@@ -220,19 +201,39 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
         return null;
     }
 
-    void addElem(E element) {
-        add(element);
+    
+
+    void addElem(E element){
+        //TODO: Left as an exercise.
+        LinkedNode<E> newNode = new SinglyListNode<>(element);
+        LinkedNode<E> current = head;
+        if(isEmpty()){
+            head = newNode;
+            tail = newNode;
+        } else{
+            while(current.getNext()!=null && comparator.compare(element, current.getElement()) <= 0){
+                if(comparator.compare(element, current.getNext().getElement()) == 0){
+                    LinkedNode<E> next = current.getNext();
+                    current.setNext(newNode);
+                    newNode.setNext(next);
+                } else{
+                    current = current.getNext();
+                }
+            }
+        }
+        currentSize++;
     }
 
+
     private boolean invariant() {
+        //TODO: Left as an exercise.
         return true;
     }
 
     void writeData(ObjectOutputStream oos) throws IOException {
-        oos.defaultWriteObject();
+        oos.defaultWriteObject(); // write the normal attributes
     }
-
     void readData(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        ois.defaultReadObject();
+        ois.defaultReadObject(); // read the normal attributes
     }
 }
