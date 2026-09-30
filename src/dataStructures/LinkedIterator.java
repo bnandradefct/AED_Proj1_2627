@@ -29,24 +29,5 @@ class LinkedIterator<E>  implements Iterator<E> {
         nextToReturn=first;
     }
 
-    @Override
-    public boolean hasNext() {
-        return nextToReturn!=null;
-    }
-
-    @Override
-    public E next() throws NoSuchElementException {
-        if(!hasNext()){
-            throw new NoSuchElementException();
-        }
-        E element = nextToReturn.getElement();
-        nextToReturn=nextToReturn.getNext();
-        return element;
-    }
-
-    @Override
-    public void rewind() {
-        nextToReturn=first;
-    }
-
+    //TODO: Left as an exercise.
 }

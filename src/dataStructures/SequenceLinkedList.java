@@ -83,17 +83,7 @@ abstract class SequenceLinkedList<E> extends LinkedList<E> implements List<E>{
      */
     public int indexOf(E element) {
         //TODO: Left as an exercise.
-        int i = 0;
-        LinkedNode<E> node = head;
-        while(node != null) {
-            if ((element == null && node.getElement() == null) || (element != null && element.equals(node.getElement()))) {
-                return i;
-            } else{
-                node = node.getNext();
-                i++;
-            }
-        }
-        return -1;
+        return 0;
     }
 
     /**
@@ -210,4 +200,7 @@ abstract class SequenceLinkedList<E> extends LinkedList<E> implements List<E>{
         return pair;
     }
 
+    void addElem(E element){
+        //TODO: Left as an exercise.
+    }
 }

@@ -41,7 +41,7 @@ abstract class LinkedList<E> implements Serializable {
      */
     public boolean isEmpty() {
 	//TODO: Left as an exercise.
-        return currentSize==0;
+        return true;
     }
     /**
      * Returns the number of elements in the list.
@@ -49,7 +49,7 @@ abstract class LinkedList<E> implements Serializable {
      */
     public int size() {
 	//TODO: Left as an exercise.
-        return currentSize;
+        return 0;
     }
 
     /**
@@ -66,12 +66,6 @@ abstract class LinkedList<E> implements Serializable {
      */
     void addFirstNode(LinkedNode<E> newNode){
         //TODO: Left as an exercise.
-        if (isEmpty()) {
-            tail = newNode;
-        }
-        newNode.setNext(head);
-        head=newNode;
-        currentSize++;
     }
     /**
      * Insert a node on the tail of list
@@ -79,14 +73,6 @@ abstract class LinkedList<E> implements Serializable {
      */
     void addLastNode(LinkedNode<E> newNode){
 	//TODO: Left as an exercise.
-        if(isEmpty()) {
-            head = newNode;
-        } else{
-            tail.setNext(newNode);
-        }
-        newNode.setNext(null);
-        tail=newNode;
-        currentSize++;
     }
     /**
      * Record with two nodes (prev, node)
@@ -102,12 +88,6 @@ abstract class LinkedList<E> implements Serializable {
      */
     void addMiddleNode(pairNode<E> pair,LinkedNode<E> newNode){
  	//TODO: Left as an exercise.
-        LinkedNode pre = pair.prev();
-        LinkedNode post = pair.node();
-
-        pre.setNext(newNode);
-        newNode.setNext(post);
-        currentSize++;
     }
     /**
      * Removes the first node in the list.
@@ -116,11 +96,7 @@ abstract class LinkedList<E> implements Serializable {
      */
     E removeFirstNode(){
  	//TODO: Left as an exercise.
-	    E element = head.getElement();
-        head = head.getNext();
-        currentSize--;
-        if(isEmpty()) tail = null;
-        return element;
+	return null;
     }
 
     /**
@@ -129,18 +105,7 @@ abstract class LinkedList<E> implements Serializable {
      */
     E removeLastNode(pairNode<E> pair){
 	//TODO: Left as an exercise.
-        E element = tail.getElement();
-        LinkedNode prev = pair.prev();
-
-        if(prev == null){
-            head = null;
-            tail = null;
-        } else{
-            prev.setNext(null);
-            tail = prev;
-        }
-        currentSize--;
-        return element;
+        return null;
     }
     /**
      * remove the node pair.node()
@@ -149,11 +114,6 @@ abstract class LinkedList<E> implements Serializable {
      */
     void removeMiddleNode(pairNode<E> pair) {
         //TODO: Left as an exercise.
-        LinkedNode prev = pair.prev();
-        LinkedNode current = pair.node();
-        prev.setNext(current.getNext());
-        current.setNext(null);
-        currentSize--;
     }
 
     /**
@@ -163,30 +123,35 @@ abstract class LinkedList<E> implements Serializable {
      */
     pairNode<E>  nodeOf(E element){
         //TODO: Left as an exercise.
-        LinkedNode current = head;
-        LinkedNode prev = null;
-
-
-        while(current!= null){
-            if((element == null && current.getElement() == null) ||
-                    element.equals(current.getElement())){
-                return new pairNode<E>(prev,current);
-            }
-            prev = current;
-            current = current.getNext();
-        }
         return null;
     }
 
     LinkedNode<E> getFirstNode(){
         //TODO: Left as an exercise.
-        return head;
+        return null;
     }
 
     LinkedNode<E> getLastNode(){
         //TODO: Left as an exercise.
-        return tail;
+        return null;
     }
-    
+     // MANUAL SERIALIZATION
+    @Serial
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        //TODO: Left as an exercise.
+    }
 
+    // MANUAL DESERIALIZATION
+    @Serial
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        //TODO: Left as an exercise.
+    }
+
+    void writeData(ObjectOutputStream out) throws IOException{
+    }
+
+    void readData(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    }
+
+    abstract void addElem(E element);
 }

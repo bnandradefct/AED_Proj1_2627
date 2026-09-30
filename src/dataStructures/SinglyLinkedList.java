@@ -21,8 +21,6 @@ public class SinglyLinkedList<E> extends SequenceLinkedList<E> {
     @Override
     public void addFirst(E element) {
        //TODO: Left as an exercise.
-        LinkedNode newNode = new SinglyListNode<>(element);
-        super.addFirstNode(newNode);
     }
 
     /**
@@ -33,15 +31,9 @@ public class SinglyLinkedList<E> extends SequenceLinkedList<E> {
     @Override
     public void addLast(E element) {
        //TODO: Left as an exercise.
-        LinkedNode newNode = new SinglyListNode<>(element);
-        super.addLastNode(newNode);
     }
 
     void addMiddle(int position, E element) {
         //TODO: Left as an exercise.
-        pairNode pair = getNodes(position);
-        LinkedNode newNode = new SinglyListNode<>(element);
-        newNode.setNext(pair.node());
-        super.addMiddleNode(pair, newNode);
     }
 }
