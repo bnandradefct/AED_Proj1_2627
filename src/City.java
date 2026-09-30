@@ -24,4 +24,9 @@ public class City {
     return population;
   }
 
+  public boolean matches(String cityName, String countryName) {
+        return this.country.equalsIgnoreCase(countryName) && 
+               this.name.equalsIgnoreCase(cityName);
+    }
+
 }

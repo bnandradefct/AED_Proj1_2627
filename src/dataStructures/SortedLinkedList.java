@@ -73,7 +73,6 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
     public void add(E element) {
         //TODO: Left as an exercise.
         }
-    }
     /**
      * Inserts the element before node after.
      * Precondition: after is not the head of the list.
