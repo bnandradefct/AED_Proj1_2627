@@ -33,8 +33,12 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return first element in the list
      * @throws NoSuchElementException - if size() == 0
      */
-    public E getMin( ) {
+    public E getMin( ) throws NoSuchElementException{
         //TODO: Left as an exercise.
+        if(currentSize == 0){
+            throw new NoSuchElementException();
+        }
+        return head.getElement();
     }
 
     /**
@@ -42,8 +46,12 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * @return last element in the list
      * @throws NoSuchElementException - if size() == 0
      */
-    public E getMax( ) {
+    public E getMax( ) throws NoSuchElementException{
         //TODO: Left as an exercise.
+        if(currentSize == 0){
+            throw new NoSuchElementException();
+        }
+        return tail.getElement();
     }
     /**
      * Returns the first occurrence of the element equals to the given element in the list.
@@ -52,6 +60,16 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
     @Override
     public E get(E element) {
         //TODO: Left as an exercise.
+        Iterator<E> iterator = iterator();
+        while(iterator.hasNext()){
+            E elem = iterator.next();
+            int comp = comparator.compare(elem, element);
+            if(comp == 0){
+                return elem;
+            } else if(comp > 0){
+                return null;
+            }
+        }
         return null;
     }
     /**
@@ -62,7 +80,17 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     public boolean contains(E element) {
         //TODO: Left as an exercise.
-        return true;
+        Iterator<E> iterator = iterator();
+        while(iterator.hasNext()){
+            E elem = iterator.next();
+            int comp = comparator.compare(elem, element);
+            if(comp == 0){
+                return true;
+            } else if(comp > 0){
+                return false;
+            }
+        }
+        return false;
     }
 
     /**
@@ -72,7 +100,24 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     public void add(E element) {
         //TODO: Left as an exercise.
+        if(isEmpty() || comparator.compare(element, head.getElement()) < 0){
+            addFirst(element);
+            return;
         }
+
+        if(comparator.compare(element, tail.getElement()) >= 0){
+            addLast(element);
+            return;
+        }
+
+        LinkedNode<E> current = head;
+        while(current.getNext() != null && comparator.compare(element, current.getNext().getElement()) >= 0){
+            current = current.getNext();
+        }
+
+        addBeforeNode(element, current);
+
+    }
     /**
      * Inserts the element before node after.
      * Precondition: after is not the head of the list.
@@ -81,6 +126,10 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     void addBeforeNode(E element, LinkedNode<E> before){
         //TODO: Left as an exercise.
+        LinkedNode<E> newNode = new SinglyListNode<>(element);
+        newNode.setNext(before.getNext());
+        before.setNext(newNode);
+        currentSize++;
     }
     /**
      * Inserts the element at the first position in the list.
@@ -88,6 +137,15 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     void addFirst( E element ) {
         //TODO: Left as an exercise.
+        LinkedNode<E> newNode = new SinglyListNode<>(element);
+        if(isEmpty()){
+            tail = newNode;
+        } else{
+            newNode.setNext(head);
+        }
+        head = newNode;
+
+        currentSize++;
     }
 
     /**
@@ -96,6 +154,14 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     void addLast( E element ) {
         //TODO: Left as an exercise.
+        LinkedNode<E> newNode = new SinglyListNode<>(element);
+        if(isEmpty()){
+            head = newNode;
+        } else{
+            tail.setNext(newNode);
+        }
+        tail = newNode;
+        currentSize++;
     }
 
     /**
@@ -104,6 +170,34 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      */
     public E remove(E element) {
         //TODO: Left as an exercise.
+        if(isEmpty()){
+            return null;
+        }
+
+        if (comparator.compare(element, head.getElement()) == 0) {
+            E removed = head.getElement();
+            head = head.getNext();
+            if (head == null) {
+                tail = null;
+            }
+            currentSize--;
+            return removed;
+        }
+
+        LinkedNode<E> current = head;
+        while (current.getNext() != null && comparator.compare(element, current.getNext().getElement()) >= 0) {
+            if (comparator.compare(element, current.getNext().getElement()) == 0) {
+                LinkedNode<E> target = current.getNext();
+                current.setNext(target.getNext());
+                if (target == tail) {
+                    tail = current;
+                }
+                currentSize--;
+                return target.getElement();
+            }
+            current = current.getNext();
+        }
+
         return null;
     }
 
@@ -111,6 +205,23 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
 
     void addElem(E element){
         //TODO: Left as an exercise.
+        LinkedNode<E> newNode = new SinglyListNode<>(element);
+        LinkedNode<E> current = head;
+        if(isEmpty()){
+            head = newNode;
+            tail = newNode;
+        } else{
+            while(current.getNext()!=null && comparator.compare(element, current.getElement()) <= 0){
+                if(comparator.compare(element, current.getNext().getElement()) == 0){
+                    LinkedNode<E> next = current.getNext();
+                    current.setNext(newNode);
+                    newNode.setNext(next);
+                } else{
+                    current = current.getNext();
+                }
+            }
+        }
+        currentSize++;
     }
 
 
