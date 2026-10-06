@@ -10,7 +10,11 @@ public class CityDirectory {
         this.cities = new SortedLinkedList<>(new CityComparator());
     }
         
-   
+   /*
+   Complexidade temporal: Melhor caso= O(1), se a cidade procurada for a primeira do iterador
+                            Pior caso= O(n), sendo n o número de cidades, se a cidade procurada for a última do iterador ou então se ela não existir
+   Complexidade espacial =
+    */
    public City findCity(String cityName, String countryName) {
 
       Iterator<City> it = cities.iterator();
@@ -23,6 +27,11 @@ public class CityDirectory {
         return null;
    }
 
+    /*
+   Complexidade temporal: Melhor caso= O(1), se a cidade já existir e se for a primeira do iterator
+                            Pior caso= O(n), se a cidade ainda não existir e se a cidade for a última a ser adicionada
+   Complexidade espacial =
+    */
    public boolean addCity(String name, String country, int population) {
 
       if (findCity(name, country) != null) {
@@ -33,6 +42,11 @@ public class CityDirectory {
         return true;
    }
 
+    /*
+   Complexidade temporal: Melhor caso= O(n), se a cidade não existir
+                            Pior caso= O(n), se a cidade existir e é a última do iterador
+   Complexidade espacial =
+    */
    public boolean removeCity(String name, String country) {
     City existing = findCity(name, country);
         if (existing == null) {
@@ -41,16 +55,22 @@ public class CityDirectory {
         return cities.remove(existing) != null;
    }
 
-  
+    /*
+   Complexidade temporal:O(1)
+   Complexidade espacial =
+    */
   public boolean isEmpty() {
     return !cities.iterator().hasNext();
-}
+  }
 
 
-    
-    public Iterator<City> iterator() {
-        return cities.iterator();
-    } 
+    /*
+     Complexidade temporal: O(1)
+     Complexidade espacial =
+      */
+  public Iterator<City> iterator() {
+      return cities.iterator();
+  }
         
     
 
