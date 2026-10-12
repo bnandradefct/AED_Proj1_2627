@@ -1,10 +1,17 @@
-import java.util.Scanner;
 import dataStructures.Iterator;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
-    
-      CityDirectory directory = new CityDirectory();
+    private static final String DATA_FILE = "directory.dat";
+
+    public static void main(String[] args) {
+        CityDirectory directory = loadDirectory();
 
         Scanner in = new Scanner(System.in);
         boolean running = true;
@@ -32,6 +39,7 @@ public class Main {
                     executeListCities(directory);
                     break;
                 case "quit":
+                    saveDirectory(directory);
                     executeQuit();
                     running = false;
                     break;
@@ -42,7 +50,33 @@ public class Main {
         in.close();
     }
 
-      private static void executeHelp() {
+        private static CityDirectory loadDirectory() {
+        File file = new File(DATA_FILE);
+        if (file.exists()) {
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+                return (CityDirectory) in.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                // Se falhar a leitura, mostra o motivo no terminal durante os testes:
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("City directory not found.");
+        System.out.println("Creating an empty city directory.");
+        return new CityDirectoryClass();
+    }
+
+    private static void saveDirectory(CityDirectory directory) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
+            out.writeObject(directory);
+        } catch (IOException e) {
+            // Mostra o erro se falhar ao serializar
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void executeHelp() {
         System.out.println("addCity: Adds a new city to the directory.");
         System.out.println("removeCity: Removes an existing city from the directory.");
         System.out.println("population: Returns the number of inhabitants of a city.");
@@ -50,7 +84,6 @@ public class Main {
         System.out.println("help: Displays the list of available commands.");
         System.out.println("quit: Terminates the application.");
     }
-
 
     private static void executeAddCity(Scanner in, CityDirectory directory) {
         String cityName = in.nextLine().trim();
@@ -100,11 +133,8 @@ public class Main {
         }
     }
 
-
     private static void executeQuit() {
         System.out.println("City directory saved.");
         System.out.println("Goodbye.");
     }
-
-
 }

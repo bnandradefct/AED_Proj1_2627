@@ -9,7 +9,8 @@ import java.io.Serializable;
  * @param <E> Generic Element
  *
  */
-class SinglyListNode<E> implements LinkedNode<E> {
+class SinglyListNode<E> implements LinkedNode<E>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Element stored in the node.

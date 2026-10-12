@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import dataStructures.Comparator;
 
-public class CityComparator implements Comparator<City> {
+public class CityComparator implements Comparator<City>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Override
     public int compare(City c1, City c2) {

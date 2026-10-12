@@ -40,16 +40,14 @@ abstract class LinkedList<E> implements Serializable {
      * @return true if the list is empty
      */
     public boolean isEmpty() {
-	//TODO: Left as an exercise.
-        return true;
+        return currentSize == 0;
     }
     /**
      * Returns the number of elements in the list.
      * @return number of elements in the list
      */
     public int size() {
-	//TODO: Left as an exercise.
-        return 0;
+        return currentSize;
     }
 
     /**
@@ -138,20 +136,23 @@ abstract class LinkedList<E> implements Serializable {
      // MANUAL SERIALIZATION
     @Serial
     private void writeObject(ObjectOutputStream oos) throws IOException {
-        //TODO: Left as an exercise.
+        oos.defaultWriteObject();
     }
 
     // MANUAL DESERIALIZATION
     @Serial
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        //TODO: Left as an exercise.
+        ois.defaultReadObject();
     }
 
-    void writeData(ObjectOutputStream out) throws IOException{
+    void writeData(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
     }
 
     void readData(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
     }
 
     abstract void addElem(E element);
+
 }
