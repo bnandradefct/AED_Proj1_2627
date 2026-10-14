@@ -1,0 +1,33 @@
+package system;
+
+public class CityClass implements City {
+
+  private String name;
+  private String country;
+  private int population;
+
+  public CityClass(String name, String country, int population) {
+    this.name = name;
+    this.country = country;
+    this.population = population;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public int getPopulation() {
+    return population;
+  }
+
+  public boolean matches(String cityName, String countryName) {
+    return this.name.equalsIgnoreCase(cityName) && 
+           this.country.equalsIgnoreCase(countryName);
+}
+
+
+}
