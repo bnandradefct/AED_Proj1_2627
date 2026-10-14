@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
+import system.*;
+
 public class Main {
     private static final String DATA_FILE = "directory.dat";
 
@@ -54,6 +56,7 @@ public class Main {
         File file = new File(DATA_FILE);
         if (file.exists()) {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+                System.out.println("City directory restored successfully.");
                 return (CityDirectory) in.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 // Se falhar a leitura, mostra o motivo no terminal durante os testes:
