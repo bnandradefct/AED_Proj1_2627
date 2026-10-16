@@ -9,6 +9,7 @@ import java.io.*;
  * @version 1.0
  * @param <E> Generic Element
  *
+ * Space complexity: O(n), where n is the number of elements in the list.
  */
 abstract class LinkedList<E> implements Serializable {
     @Serial
@@ -29,6 +30,10 @@ abstract class LinkedList<E> implements Serializable {
      * Constructor of an empty singly linked list.
      * head and tail are initialized as null.
      * currentSize is initialized as 0.
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public LinkedList(){
         head=null;
@@ -38,6 +43,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * Returns true iff the list contains no elements.
      * @return true if the list is empty
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public boolean isEmpty() {
         return currentSize == 0;
@@ -45,6 +54,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * Returns the number of elements in the list.
      * @return number of elements in the list
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public int size() {
         return currentSize;
@@ -53,6 +66,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * Returns an iterator of the elements in the list (in a proper sequence).
      * @return Iterator of the elements in the list
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public Iterator<E> iterator() {
         return new LinkedIterator<>(head);
@@ -61,6 +78,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * Insert a node on the head of list
      * @param newNode
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     void addFirstNode(LinkedNode<E> newNode){
         //TODO: Left as an exercise.
@@ -74,6 +95,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * Insert a node on the tail of list
      * @param newNode
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     void addLastNode(LinkedNode<E> newNode){
 	//TODO: Left as an exercise.
@@ -89,6 +114,8 @@ abstract class LinkedList<E> implements Serializable {
      * Record with two nodes (prev, node)
      * @param prev
      * @param node
+     * 
+     * Space complexity: O(1)
      */
     record pairNode<E>(LinkedNode<E> prev, LinkedNode<E> node){}
 
@@ -96,6 +123,10 @@ abstract class LinkedList<E> implements Serializable {
      * Insert node (newNode) between pair.previous() and pair.node()
      * @pre: pair.previous()!=null && pair.node()!=null
      * @param newNode
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     void addMiddleNode(pairNode<E> pair,LinkedNode<E> newNode){
  	//TODO: Left as an exercise.
@@ -107,6 +138,10 @@ abstract class LinkedList<E> implements Serializable {
      * Removes the first node in the list.
      * @pre: !isEmpty()
      * @return
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     E removeFirstNode(){
  	//TODO: Left as an exercise.
@@ -122,6 +157,10 @@ abstract class LinkedList<E> implements Serializable {
     /**
      * remove the last node (pair.node()) of the list
      * @return
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     E removeLastNode(pairNode<E> pair){
 	//TODO: Left as an exercise.
@@ -140,6 +179,10 @@ abstract class LinkedList<E> implements Serializable {
      * remove the node pair.node()
      @pre: pair.previous()!=null && pair.node()!=null
      * @param pair
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     void removeMiddleNode(pairNode<E> pair) {
         //TODO: Left as an exercise.
@@ -151,6 +194,10 @@ abstract class LinkedList<E> implements Serializable {
      *
      * @param element
      * @return pair with the previous node and the element node, Or null if no element
+     * 
+     * Time complexity:
+     * - Best case: O(1) — when the list is empty or the element is at the head.
+     * - Worst case: O(n) — when the element is at the tail or does not exist in the list.
      */
     pairNode<E>  nodeOf(E element){
         //TODO: Left as an exercise.
@@ -168,31 +215,67 @@ abstract class LinkedList<E> implements Serializable {
         return null;
     }
 
+    /**
+     * Returns the first node of the list.
+     * @return the head node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     LinkedNode<E> getFirstNode(){
         //TODO: Left as an exercise.
         return head;
     }
 
+    /**
+     * Returns the last node of the list.
+     * @return the tail node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     LinkedNode<E> getLastNode(){
         //TODO: Left as an exercise.
         return tail;
     }
      // MANUAL SERIALIZATION
+    /**
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     @Serial
     private void writeObject(ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
     }
 
     // MANUAL DESERIALIZATION
+    /**
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     @Serial
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
     }
 
+    /**
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     void writeData(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
     }
 
+    /**
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     void readData(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
     }

@@ -8,6 +8,7 @@ import dataStructures.exceptions.NoSuchElementException;
  * @version 1.0
  * @param <E> Generic Element
  *
+ * Space complexity: O(1) — stores only references to the first and current nodes.
  */
 
 class LinkedIterator<E>  implements Iterator<E> {
@@ -23,19 +24,41 @@ class LinkedIterator<E>  implements Iterator<E> {
     /**
      * SinglyIterator constructor
      * @param first - Node with the first element of the iteration
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public LinkedIterator(LinkedNode<E> first) {
         this.first=first;
         nextToReturn=first;
     }
 
+    /**
+     * Checks if there are more elements in the iteration.
+     * 
+     * @return true if there are more elements, false otherwise.
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     @Override
     public boolean hasNext() {
         return nextToReturn!=null;
     }
 
+    /**
+     * Returns the next element in the iteration.
+     * 
+     * @return the next element in the iteration.
+     * @throws NoSuchElementException if there are no more elements to return.
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     @Override
-        
     public E next() throws NoSuchElementException {
         if(!hasNext()) throw new NoSuchElementException();
         E element = nextToReturn.getElement();
@@ -43,11 +66,16 @@ class LinkedIterator<E>  implements Iterator<E> {
         return element;
     }
 
-
+    /**
+     * Restarts the iteration from the first element of the list.
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
+     */
     @Override
     public void rewind() {
         nextToReturn=first;
     }
 
-    //TODO: Left as an exercise.
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @version 1.0
  * @param <E> Generic Element
  *
+ * Space complexity: O(1)
  */
 class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     private static final long serialVersionUID = 1L;
@@ -26,6 +27,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
      *
      * @param theElement - The element to be contained in the node
      * @param theNext - the next node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public SinglyListNode( E theElement, SinglyListNode<E> theNext ) {
         element = theElement;
@@ -35,6 +40,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     /**
      *
      * @param theElement to be contained in the node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public SinglyListNode( E theElement ) {
         this(theElement, null);
@@ -43,6 +52,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     /**
      *
      * @return the element contained in the node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public E getElement( ) {
         return element;
@@ -51,6 +64,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     /**
      *
      * @return the next node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public LinkedNode<E> getNext( ) {
         return next;
@@ -59,6 +76,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     /**
      *
      * @param newElement - New element to replace the current element
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public void setElement( E newElement ) {
         element = newElement;
@@ -67,6 +88,10 @@ class SinglyListNode<E> implements LinkedNode<E>, Serializable {
     /**
      *
      * @param newNext - node to replace the next node
+     * 
+     * Time complexity:
+     * - Best case: O(1)
+     * - Worst case: O(1)
      */
     public void setNext( LinkedNode<E> newNext ) {
         next = newNext;
