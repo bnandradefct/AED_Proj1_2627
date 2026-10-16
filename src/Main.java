@@ -10,25 +10,18 @@ import java.util.Scanner;
 import system.*;
 
 /**
- * Main class for the Persistent City Directory application.
- * Handles user interaction, command processing, and directory persistence.
+ * Main application class for the Persistent City Directory.
+ * Handles command execution, user interactions, and state persistence.
+ *
+ * @authors Bernardo Andrade 68024; Rodrigo Pinheiro 69067
  * 
  * Space complexity: O(n), where n is the number of cities stored in the directory.
  */
+
 public class Main {
     private static final String DATA_FILE = "directory.dat";
 
-    /**
-     * Entry point of the application. Restores the directory if available and
-     * processes user commands in a loop until the quit command is issued.
-     * 
-     * @param args Command-line arguments (not used).
-     * 
-     * Time complexity:
-     * - Best case: O(1) — when the directory is empty and the first command is quit.
-     * - Worst case: O(k * n) — where k is the number of executed commands and n
-     *   is the number of cities in the directory.
-     */
+    
     public static void main(String[] args) {
         CityDirectory directory = loadDirectory();
 
@@ -69,16 +62,6 @@ public class Main {
         in.close();
     }
 
-    /**
-     * Attempts to load and deserialize the city directory from the serialization file.
-     * If the file does not exist, creates and returns a new empty city directory.
-     * 
-     * @return The restored CityDirectory instance, or a new empty one if not found.
-     * 
-     * Time complexity:
-     * - Best case: O(1) — when the serialization file does not exist or is empty.
-     * - Worst case: O(n) — where n is the number of cities deserialized from the file.
-     */
     private static CityDirectory loadDirectory() {
         File file = new File(DATA_FILE);
         if (file.exists()) {
@@ -86,7 +69,6 @@ public class Main {
                 System.out.println("City directory restored successfully.");
                 return (CityDirectory) in.readObject();
             } catch (IOException | ClassNotFoundException e) {
-                // Se falhar a leitura, mostra o motivo no terminal durante os testes:
                 e.printStackTrace();
             }
         }
@@ -96,20 +78,10 @@ public class Main {
         return new CityDirectoryClass();
     }
 
-    /**
-     * Serializes and saves the current state of the city directory to a file.
-     * 
-     * @param directory The CityDirectory instance to be saved.
-     * 
-     * Time complexity:
-     * - Best case: O(1) — when the directory is empty.
-     * - Worst case: O(n) — where n is the number of cities to serialize.
-     */
     private static void saveDirectory(CityDirectory directory) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
             out.writeObject(directory);
         } catch (IOException e) {
-            // Mostra o erro se falhar ao serializar
             e.printStackTrace();
         }
     }
@@ -139,7 +111,7 @@ public class Main {
      * Time complexity:
      * - Best case: O(1) — when the city already exists at the head of the list
      *   or the directory is empty.
-     * - Worst case: O(n) — where n is the number of cities in the directory.
+     * - Worst case: O(n) — where n is the number of cities in the directory, as every node in the list must be visited.
      */
     private static void executeAddCity(Scanner in, CityDirectory directory) {
         String cityName = in.nextLine().trim();
@@ -162,7 +134,7 @@ public class Main {
      * 
      * Time complexity:
      * - Best case: O(1) — when the city to remove is at the head of the list.
-     * - Worst case: O(n) — where n is the number of cities in the directory.
+     * - Worst case: O(n) — where n is the number of cities in the directory, as every node in the list must be visited.
      */
     private static void executeRemoveCity(Scanner in, CityDirectory directory) {
         String cityName = in.nextLine().trim();
@@ -183,7 +155,7 @@ public class Main {
      * 
      * Time complexity:
      * - Best case: O(1) — when the target city is at the head of the list.
-     * - Worst case: O(n) — where n is the number of cities in the directory.
+     * - Worst case: O(n) — where n is the number of cities in the directory, as every node in the list must be visited.
      */
     private static void executePopulation(Scanner in, CityDirectory directory) {
         String cityName = in.nextLine().trim();
@@ -203,8 +175,7 @@ public class Main {
      * @param directory The CityDirectory instance.
      * 
      * Time complexity:
-     * - Best case: O(1) — when the directory is empty.
-     * - Worst case: O(n) — where n is the number of cities in the directory.
+     * - Best and Worst case: O(n) — where n is the number of cities in the directory, as every node in the list must be visited.
      */
     private static void executeListCities(CityDirectory directory) {
         if (directory.isEmpty()) {

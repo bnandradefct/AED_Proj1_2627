@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * Sorted linked list Implementation
- * @author AED Team
+ * @author Bernardo Andrade 68024; Rodrigo Pinheiro 69067
  * @version 1.0
  * @param <E> Generic Element
  * 
@@ -25,10 +25,6 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
      * Constructor of an empty sorted singly linked list.
      * head and tail are initialized as null.
      * currentSize is initialized as 0.
-     * 
-     * Time complexity:
-     * - Best case: O(1)
-     * - Worst case: O(1)
      */
     public SortedLinkedList(Comparator<E> comparator) {
         super();
@@ -270,14 +266,6 @@ public class SortedLinkedList<E> extends LinkedList<E> implements SortedList<E> 
         add(element);
     }
 
-    /**
-     * Checks the class invariant.
-     * @return true if the invariant holds
-     * 
-     * Time complexity:
-     * - Best case: O(1)
-     * - Worst case: O(1)
-     */
     private boolean invariant() {
         return true;
     }

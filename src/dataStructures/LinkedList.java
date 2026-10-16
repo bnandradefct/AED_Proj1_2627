@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Linked List
  * Includes description of general methods to be implemented by linked lists.
- * @author AED  Team
+ * @author Bernardo Andrade 68024; Rodrigo Pinheiro 69067
  * @version 1.0
  * @param <E> Generic Element
  *
@@ -30,10 +30,6 @@ abstract class LinkedList<E> implements Serializable {
      * Constructor of an empty singly linked list.
      * head and tail are initialized as null.
      * currentSize is initialized as 0.
-     * 
-     * Time complexity:
-     * - Best case: O(1)
-     * - Worst case: O(1)
      */
     public LinkedList(){
         head=null;
@@ -101,7 +97,6 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     void addLastNode(LinkedNode<E> newNode){
-	//TODO: Left as an exercise.
         if (isEmpty()) {
             head = newNode;
         } else {
@@ -110,13 +105,8 @@ abstract class LinkedList<E> implements Serializable {
         tail = newNode;
         currentSize++;
     }
-    /**
-     * Record with two nodes (prev, node)
-     * @param prev
-     * @param node
-     * 
-     * Space complexity: O(1)
-     */
+    
+
     record pairNode<E>(LinkedNode<E> prev, LinkedNode<E> node){}
 
     /**
@@ -129,7 +119,6 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     void addMiddleNode(pairNode<E> pair,LinkedNode<E> newNode){
- 	//TODO: Left as an exercise.
         newNode.setNext(pair.node());
         pair.prev().setNext(newNode);
         currentSize++;
@@ -144,7 +133,6 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     E removeFirstNode(){
- 	//TODO: Left as an exercise.
         E element = head.getElement();
         head = head.getNext();
         currentSize--;
@@ -163,7 +151,6 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     E removeLastNode(pairNode<E> pair){
-	//TODO: Left as an exercise.
         E element = pair.node().getElement();
         if (head == tail) {
             head = null;
@@ -185,7 +172,6 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     void removeMiddleNode(pairNode<E> pair) {
-        //TODO: Left as an exercise.
         pair.prev().setNext(pair.node().getNext());
         currentSize--;
     }
@@ -200,7 +186,7 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(n) — when the element is at the tail or does not exist in the list.
      */
     pairNode<E>  nodeOf(E element){
-        //TODO: Left as an exercise.
+  
         LinkedNode<E> prev = null;
         LinkedNode<E> curr = head;
 
@@ -224,7 +210,7 @@ abstract class LinkedList<E> implements Serializable {
      * - Worst case: O(1)
      */
     LinkedNode<E> getFirstNode(){
-        //TODO: Left as an exercise.
+
         return head;
     }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Singly List Node Implementation
- * @author AED  Team
+ * @authors Bernardo Andrade 68024; Rodrigo Pinheiro 69067
  * @version 1.0
  * @param <E> Generic Element
  *

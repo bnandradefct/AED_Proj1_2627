@@ -18,10 +18,6 @@ public class CityClass implements City {
      * @param name       The name of the city.
      * @param country    The country to which the city belongs.
      * @param population The number of inhabitants of the city.
-     * 
-     * Time complexity:
-     * - Best case: O(1)
-     * - Worst case: O(1)
      */
     public CityClass(String name, String country, int population) {
         this.name = name;

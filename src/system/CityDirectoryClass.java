@@ -33,7 +33,7 @@ public class CityDirectoryClass implements CityDirectory {
      * @return The matching City object if found, or null otherwise.
      * 
      * Time complexity:
-     * - Best case: O(1) — when the directory is empty or the target city is at the head of the list.
+     * - Best case: O(1) — when the target city is at the head of the list.
      * - Worst case: O(n) — when the target city is at the end of the list or does not exist,
      *   requiring a traversal of all n cities.
      */
@@ -59,8 +59,7 @@ public class CityDirectoryClass implements CityDirectory {
      * @return true if the city was successfully added, false if it already exists.
      * 
      * Time complexity:
-     * - Best case: O(1) — when the city already exists at the head of the list,
-     *   or when the directory is empty.
+     * - Best case: O(1) — when the city already exists at the head of the list
      * - Worst case: O(n) — when the city does not exist (findCity traverses all n elements)
      *   and the sorted insertion into the SortedLinkedList takes up to O(n) steps.
      */

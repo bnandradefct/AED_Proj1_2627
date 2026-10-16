@@ -4,7 +4,7 @@ import dataStructures.exceptions.NoSuchElementException;
 
 /**
  * Implementation of an Iterator for Linked List
- * @author AED  Team
+ * @authors Bernardo Andrade 68024; Rodrigo Pinheiro 69067
  * @version 1.0
  * @param <E> Generic Element
  *
@@ -25,9 +25,6 @@ class LinkedIterator<E>  implements Iterator<E> {
      * SinglyIterator constructor
      * @param first - Node with the first element of the iteration
      * 
-     * Time complexity:
-     * - Best case: O(1)
-     * - Worst case: O(1)
      */
     public LinkedIterator(LinkedNode<E> first) {
         this.first=first;
